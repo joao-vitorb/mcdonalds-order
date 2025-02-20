@@ -1,5 +1,13 @@
-const HomePage = () => {
-  return <h1>hello world</h1>;
+import { getRestaurantBySlug } from '@/data/get-restaurant-by-slug';
+
+interface RestaurantPageProps {
+    params: Promise<{ slug : string}>;
 }
- 
-export default HomePage;
+
+const RestaurantPage = async ({params} : RestaurantPageProps) => {
+    const { slug } = await params;
+    const restaurant = await getRestaurantBySlug(slug);
+    return <h1>{restaurant?.name}</h1>;
+}
+
+export default RestaurantPage;
